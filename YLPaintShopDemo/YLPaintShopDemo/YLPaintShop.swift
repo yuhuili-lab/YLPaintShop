@@ -51,6 +51,40 @@ private extension UIImage {
         
         return context!
     }
+    
+    
+    /* This code is based on the C# code posted by Stack Overflow user
+     * "Cecil has a name" at this link:
+     * http://stackoverflow.com/questions/1696113/how-do-i-gaussian-blur-an-image-without-using-any-in-built-gaussian-functions
+     */
+    static func gaussianKernalForRadius(_ radius: Int) -> [Int:Double] {
+        if radius < 1 {
+            return [Int:Double]()
+        }
+        
+        let kernelSize = radius * 2 + 1
+        var kernel = [Int:Double]()
+        
+        let magic1 = 1.0 / (2.0 * Double(radius) * Double(radius))
+        let magic2 = 1.0 / (sqrt(2.0 * .pi) * Double(radius))
+        
+        var r = -radius
+        var div = 0.0
+        
+        for i in 0...kernelSize-1 {
+            let x = Double(r * r)
+            let value = magic2 * exp(-x * magic1)
+            kernel[i] = value
+            r += 1
+            div += value
+        }
+        
+        for i in 0...kernelSize-1 {
+            kernel[i] = kernel[i]! / div
+        }
+        
+        return kernel
+    }
 }
 
 extension UIImage {
@@ -174,6 +208,65 @@ extension UIImage {
                 dataType[offset+2] = 255
                 dataType[offset+3] = 255
             }
+            
+        }
+        
+        let colorSpace = CGColorSpaceCreateDeviceRGB()
+        let bitmapBytesPerRow = width * 4
+        
+        let finalContext = CGContext(data: data, width: width, height: height, bitsPerComponent: 8, bytesPerRow: bitmapBytesPerRow, space: colorSpace, bitmapInfo: CGImageAlphaInfo.premultipliedFirst.rawValue)
+        let imageRef = finalContext?.makeImage()
+        
+        return UIImage(cgImage: imageRef!)
+    }
+    
+    
+    func gaussianBlur(_ radius: Int) -> UIImage? {
+        let inImage:CGImage = self.cgImage!
+        let context = self.createContext(inImage)
+        
+        let width = inImage.width
+        let height = inImage.height
+        let total = width*height
+        
+        let rect = CGRect(x:0, y:0, width:width, height:height)
+        
+        context.clear(rect)
+        
+        context.draw(inImage, in: rect)
+        
+        let data = context.data
+        let dataType = UnsafeMutableRawPointer(data)!.assumingMemoryBound(to: UInt8.self)
+        
+        
+        let gaussianKernel = UIImage.gaussianKernalForRadius(radius)
+        
+        
+        // Horizontal Pass
+        for i in 0...total-1 {
+            // Find out which row which column currently is
+            let row:Int = i/width
+            let col:Int = i%width
+            let offset = 4 * i
+            
+            var totalRed:Double = 0
+            var totalGreen:Double = 0
+            var totalBlue:Double = 0
+            
+            for j in col-radius...col+radius where j>=0 && j<width {
+                
+                let multiplier = gaussianKernel[j-(col-radius)]! as Double
+                
+                let newOffset = 4 * ((width * row) + j)
+                
+                totalRed += Double(dataType[newOffset+1]) * multiplier
+                totalGreen += Double(dataType[newOffset+2]) * multiplier
+                totalBlue += Double(dataType[newOffset+3]) * multiplier
+            }
+            
+            dataType[offset+1] = UInt8(totalRed)
+            dataType[offset+2] = UInt8(totalGreen)
+            dataType[offset+3] = UInt8(totalBlue)
             
         }
         
