@@ -8,6 +8,11 @@
 
 import UIKit
 
+enum GaussianDirection:Int {
+    case Horizontal
+    case Vertical
+}
+
 class YLPaintShop: NSObject {
     
 }
@@ -104,6 +109,62 @@ private extension UIImage {
         }
         
         return 1.0 / (1.0 - uselessAmount)
+    }
+    
+    static func performGaussianPass(direction dir: GaussianDirection, width: Int, height: Int, radius: Int, context: CGContext, gaussianKernel: [Int: Double]) {
+        
+        let data = context.data
+        let dataType = UnsafeMutableRawPointer(data)!.assumingMemoryBound(to: UInt8.self)
+        
+        for i in 0...width*height-1 {
+            // Find out which row which column currently is
+            let row:Int = i/width
+            let col:Int = i%width
+            let offset = 4 * i
+            
+            var totalRed:Double = 0
+            var totalGreen:Double = 0
+            var totalBlue:Double = 0
+            
+            switch dir {
+            case .Horizontal:
+                let gaussianKernelMultiplier = UIImage.gaussianKernelMultiplier(index: col, total: width, kernel: gaussianKernel)
+                
+                for j in col-radius...col+radius where j>=0 && j<width {
+                    
+                    let multiplier = (gaussianKernel[j-(col-radius)]! as Double) * gaussianKernelMultiplier
+                    
+                    let newOffset = 4 * ((width * row) + j)
+                    
+                    totalRed += Double(dataType[newOffset+1]) * multiplier
+                    totalGreen += Double(dataType[newOffset+2]) * multiplier
+                    totalBlue += Double(dataType[newOffset+3]) * multiplier
+                }
+                break;
+            
+                
+            case .Vertical:
+                let gaussianKernelMultiplier = UIImage.gaussianKernelMultiplier(index: row, total: height, kernel: gaussianKernel)
+                
+                for j in row-radius...row+radius where j>=0 && j<height {
+                    
+                    let multiplier = (gaussianKernel[j-(row-radius)]! as Double) * gaussianKernelMultiplier
+                    
+                    let newOffset = 4 * ((width * j) + col)
+                    
+                    totalRed += Double(dataType[newOffset+1]) * multiplier
+                    totalGreen += Double(dataType[newOffset+2]) * multiplier
+                    totalBlue += Double(dataType[newOffset+3]) * multiplier
+                }
+                break;
+                
+            }
+            
+            
+            dataType[offset+1] = UInt8(totalRed)
+            dataType[offset+2] = UInt8(totalGreen)
+            dataType[offset+3] = UInt8(totalBlue)
+        }
     }
 }
 
@@ -247,55 +308,23 @@ extension UIImage {
         
         let width = inImage.width
         let height = inImage.height
-        let total = width*height
         
         let rect = CGRect(x:0, y:0, width:width, height:height)
         
         context.clear(rect)
-        
         context.draw(inImage, in: rect)
-        
-        let data = context.data
-        let dataType = UnsafeMutableRawPointer(data)!.assumingMemoryBound(to: UInt8.self)
-        
         
         let gaussianKernel = UIImage.gaussianKernalForRadius(radius)
         
         
-        // Horizontal Pass
-        for i in 0...total-1 {
-            // Find out which row which column currently is
-            let row:Int = i/width
-            let col:Int = i%width
-            let offset = 4 * i
-            
-            var totalRed:Double = 0
-            var totalGreen:Double = 0
-            var totalBlue:Double = 0
-            
-            let gaussianKernelMultiplier = UIImage.gaussianKernelMultiplier(index: col, total: width, kernel: gaussianKernel)
-            
-            for j in col-radius...col+radius where j>=0 && j<width {
-                
-                let multiplier = (gaussianKernel[j-(col-radius)]! as Double) * gaussianKernelMultiplier
-                
-                let newOffset = 4 * ((width * row) + j)
-                
-                totalRed += Double(dataType[newOffset+1]) * multiplier
-                totalGreen += Double(dataType[newOffset+2]) * multiplier
-                totalBlue += Double(dataType[newOffset+3]) * multiplier
-            }
-            
-            dataType[offset+1] = UInt8(totalRed)
-            dataType[offset+2] = UInt8(totalGreen)
-            dataType[offset+3] = UInt8(totalBlue)
-            
-        }
+        UIImage.performGaussianPass(direction: .Horizontal, width: width, height: height, radius: radius, context: context, gaussianKernel: gaussianKernel)
+        UIImage.performGaussianPass(direction: .Vertical, width: width, height: height, radius: radius, context: context, gaussianKernel: gaussianKernel)
+        
         
         let colorSpace = CGColorSpaceCreateDeviceRGB()
         let bitmapBytesPerRow = width * 4
         
-        let finalContext = CGContext(data: data, width: width, height: height, bitsPerComponent: 8, bytesPerRow: bitmapBytesPerRow, space: colorSpace, bitmapInfo: CGImageAlphaInfo.premultipliedFirst.rawValue)
+        let finalContext = CGContext(data: context.data, width: width, height: height, bitsPerComponent: 8, bytesPerRow: bitmapBytesPerRow, space: colorSpace, bitmapInfo: CGImageAlphaInfo.premultipliedFirst.rawValue)
         let imageRef = finalContext?.makeImage()
         
         return UIImage(cgImage: imageRef!)
