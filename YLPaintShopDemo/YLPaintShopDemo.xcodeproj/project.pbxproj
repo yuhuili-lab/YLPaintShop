@@ -8,9 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		186582AA1DE16EC5000BDDD7 /* pusheen.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 186582A91DE16EC5000BDDD7 /* pusheen.jpg */; };
-		186582AC1DE1761F000BDDD7 /* ScatterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 186582AB1DE1761F000BDDD7 /* ScatterViewController.swift */; };
-		186582AE1DE17A90000BDDD7 /* PaintEdgeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 186582AD1DE17A90000BDDD7 /* PaintEdgeViewController.swift */; };
-		186582B01DE22D5F000BDDD7 /* GaussianBlurViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 186582AF1DE22D5F000BDDD7 /* GaussianBlurViewController.swift */; };
+		186582B21DE24453000BDDD7 /* YLPaintShopViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 186582B11DE24453000BDDD7 /* YLPaintShopViewController.swift */; };
+		186582B41DE24F11000BDDD7 /* AboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 186582B31DE24F11000BDDD7 /* AboutViewController.swift */; };
 		9F8871C21DE15B4000F06AA0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F8871C11DE15B4000F06AA0 /* AppDelegate.swift */; };
 		9F8871C71DE15B4000F06AA0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9F8871C51DE15B4000F06AA0 /* Main.storyboard */; };
 		9F8871C91DE15B4000F06AA0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9F8871C81DE15B4000F06AA0 /* Assets.xcassets */; };
@@ -20,9 +19,8 @@
 
 /* Begin PBXFileReference section */
 		186582A91DE16EC5000BDDD7 /* pusheen.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = pusheen.jpg; sourceTree = "<group>"; };
-		186582AB1DE1761F000BDDD7 /* ScatterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScatterViewController.swift; sourceTree = "<group>"; };
-		186582AD1DE17A90000BDDD7 /* PaintEdgeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaintEdgeViewController.swift; sourceTree = "<group>"; };
-		186582AF1DE22D5F000BDDD7 /* GaussianBlurViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GaussianBlurViewController.swift; sourceTree = "<group>"; };
+		186582B11DE24453000BDDD7 /* YLPaintShopViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YLPaintShopViewController.swift; sourceTree = "<group>"; };
+		186582B31DE24F11000BDDD7 /* AboutViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutViewController.swift; sourceTree = "<group>"; };
 		9F8871BE1DE15B4000F06AA0 /* YLPaintShopDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YLPaintShopDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9F8871C11DE15B4000F06AA0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9F8871C61DE15B4000F06AA0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -63,15 +61,14 @@
 			isa = PBXGroup;
 			children = (
 				9F8871D31DE15B7400F06AA0 /* YLPaintShop.swift */,
-				186582A91DE16EC5000BDDD7 /* pusheen.jpg */,
 				9F8871C11DE15B4000F06AA0 /* AppDelegate.swift */,
-				186582AB1DE1761F000BDDD7 /* ScatterViewController.swift */,
-				186582AD1DE17A90000BDDD7 /* PaintEdgeViewController.swift */,
-				186582AF1DE22D5F000BDDD7 /* GaussianBlurViewController.swift */,
 				9F8871C51DE15B4000F06AA0 /* Main.storyboard */,
+				186582B11DE24453000BDDD7 /* YLPaintShopViewController.swift */,
+				186582B31DE24F11000BDDD7 /* AboutViewController.swift */,
 				9F8871C81DE15B4000F06AA0 /* Assets.xcassets */,
 				9F8871CA1DE15B4000F06AA0 /* LaunchScreen.storyboard */,
 				9F8871CD1DE15B4000F06AA0 /* Info.plist */,
+				186582A91DE16EC5000BDDD7 /* pusheen.jpg */,
 			);
 			path = YLPaintShopDemo;
 			sourceTree = "<group>";
@@ -149,11 +146,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				186582AE1DE17A90000BDDD7 /* PaintEdgeViewController.swift in Sources */,
-				186582B01DE22D5F000BDDD7 /* GaussianBlurViewController.swift in Sources */,
 				9F8871D41DE15B7400F06AA0 /* YLPaintShop.swift in Sources */,
 				9F8871C21DE15B4000F06AA0 /* AppDelegate.swift in Sources */,
-				186582AC1DE1761F000BDDD7 /* ScatterViewController.swift in Sources */,
+				186582B41DE24F11000BDDD7 /* AboutViewController.swift in Sources */,
+				186582B21DE24453000BDDD7 /* YLPaintShopViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
