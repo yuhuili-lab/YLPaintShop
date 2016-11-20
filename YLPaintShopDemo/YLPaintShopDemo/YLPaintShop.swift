@@ -14,11 +14,6 @@ enum GaussianDirection:Int {
 }
 
 class YLPaintShop: NSObject {
-    
-}
-
-private extension UIImage {
-    
     static func generateRandomPoints(row row: Int, col: Int, width: Int, height: Int, radius: Int) -> (Int, Int) {
         var newRow = row + Int(arc4random_uniform(UInt32(radius*2))) - radius
         
@@ -38,25 +33,6 @@ private extension UIImage {
         
         return (newRow, newCol)
     }
-    
-    func createContext(_ inImage: CGImage) -> CGContext {
-        let bitmapBytes = 4
-        let colorSpace = CGColorSpaceCreateDeviceRGB()
-        let bitsPerComponent = 8
-        
-        let width = inImage.width
-        let height = inImage.height
-        let bitmapBytesPerRow = width * bitmapBytes
-        let bitmapByteCount = bitmapBytesPerRow * height
-        
-        // A pointer to the destination in memory where the drawing is to be rendered. The size of this memory block should be at least (bytesPerRow*height) bytes.
-        let bitmapData = malloc(bitmapByteCount)
-        
-        let context = CGContext(data: bitmapData, width: width, height: height, bitsPerComponent: bitsPerComponent, bytesPerRow: bitmapBytesPerRow, space: colorSpace, bitmapInfo: CGImageAlphaInfo.premultipliedFirst.rawValue)
-        
-        return context!
-    }
-    
     
     /* This code is based on the C# code posted by Stack Overflow user
      * "Cecil has a name" at this link:
@@ -128,7 +104,7 @@ private extension UIImage {
             
             switch dir {
             case .Horizontal:
-                let gaussianKernelMultiplier = UIImage.gaussianKernelMultiplier(index: col, total: width, kernel: gaussianKernel)
+                let gaussianKernelMultiplier = YLPaintShop.gaussianKernelMultiplier(index: col, total: width, kernel: gaussianKernel)
                 
                 for j in col-radius...col+radius where j>=0 && j<width {
                     
@@ -141,10 +117,10 @@ private extension UIImage {
                     totalBlue += Double(dataType[newOffset+3]) * multiplier
                 }
                 break;
-            
+                
                 
             case .Vertical:
-                let gaussianKernelMultiplier = UIImage.gaussianKernelMultiplier(index: row, total: height, kernel: gaussianKernel)
+                let gaussianKernelMultiplier = YLPaintShop.gaussianKernelMultiplier(index: row, total: height, kernel: gaussianKernel)
                 
                 for j in row-radius...row+radius where j>=0 && j<height {
                     
@@ -165,6 +141,27 @@ private extension UIImage {
             dataType[offset+2] = UInt8(totalGreen)
             dataType[offset+3] = UInt8(totalBlue)
         }
+    }
+}
+
+private extension UIImage {
+    
+    func createContext(_ inImage: CGImage) -> CGContext {
+        let bitmapBytes = 4
+        let colorSpace = CGColorSpaceCreateDeviceRGB()
+        let bitsPerComponent = 8
+        
+        let width = inImage.width
+        let height = inImage.height
+        let bitmapBytesPerRow = width * bitmapBytes
+        let bitmapByteCount = bitmapBytesPerRow * height
+        
+        // A pointer to the destination in memory where the drawing is to be rendered. The size of this memory block should be at least (bytesPerRow*height) bytes.
+        let bitmapData = malloc(bitmapByteCount)
+        
+        let context = CGContext(data: bitmapData, width: width, height: height, bitsPerComponent: bitsPerComponent, bytesPerRow: bitmapBytesPerRow, space: colorSpace, bitmapInfo: CGImageAlphaInfo.premultipliedFirst.rawValue)
+        
+        return context!
     }
 }
 
@@ -196,7 +193,7 @@ extension UIImage {
             let offset = 4 * i
             
             // Randomly select a point to get color from
-            let (srcRow, srcCol) = UIImage.generateRandomPoints(row: row, col: col, width: width, height: height, radius: radius)
+            let (srcRow, srcCol) = YLPaintShop.generateRandomPoints(row: row, col: col, width: width, height: height, radius: radius)
             let srcOffset = 4 * ((width * srcRow) + srcCol)
             
             
@@ -314,11 +311,11 @@ extension UIImage {
         context.clear(rect)
         context.draw(inImage, in: rect)
         
-        let gaussianKernel = UIImage.gaussianKernalForRadius(radius)
+        let gaussianKernel = YLPaintShop.gaussianKernalForRadius(radius)
         
         
-        UIImage.performGaussianPass(direction: .Horizontal, width: width, height: height, radius: radius, context: context, gaussianKernel: gaussianKernel)
-        UIImage.performGaussianPass(direction: .Vertical, width: width, height: height, radius: radius, context: context, gaussianKernel: gaussianKernel)
+        YLPaintShop.performGaussianPass(direction: .Horizontal, width: width, height: height, radius: radius, context: context, gaussianKernel: gaussianKernel)
+        YLPaintShop.performGaussianPass(direction: .Vertical, width: width, height: height, radius: radius, context: context, gaussianKernel: gaussianKernel)
         
         
         let colorSpace = CGColorSpaceCreateDeviceRGB()
