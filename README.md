@@ -15,3 +15,8 @@ img.scatter(radius)
 ```
 img.paintEdge(threshold)
 ```
+
+* Gaussian Blur
+```
+img.gaussianBlur(radius)
+```
