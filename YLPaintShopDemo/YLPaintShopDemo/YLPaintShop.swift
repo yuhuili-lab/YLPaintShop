@@ -14,8 +14,8 @@ class YLPaintShop: NSObject {
 
 private extension UIImage {
     
-    static func generateRandomPoints(row rowInternal: Int, col: Int, width: Int, height: Int, radius: Int) -> (Int, Int) {
-        var newRow = rowInternal + Int(arc4random_uniform(UInt32(radius*2))) - radius
+    static func generateRandomPoints(row row: Int, col: Int, width: Int, height: Int, radius: Int) -> (Int, Int) {
+        var newRow = row + Int(arc4random_uniform(UInt32(radius*2))) - radius
         
         if newRow >= height {
             newRow = height-1
@@ -89,8 +89,6 @@ extension UIImage {
             dataType[offset+1] = dataType[srcOffset+1]
             dataType[offset+2] = dataType[srcOffset+2]
             dataType[offset+3] = dataType[srcOffset+3]
-            
-            
             
         }
         
@@ -187,4 +185,5 @@ extension UIImage {
         
         return UIImage(cgImage: imageRef!)
     }
+    
 }
