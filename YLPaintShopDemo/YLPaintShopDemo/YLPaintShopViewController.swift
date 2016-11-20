@@ -156,7 +156,7 @@ class YLPaintShopViewController: UIViewController {
                 self.activityIndicator.stopAnimating()
                 self.activityIndicator.isHidden = true
                 self.imageView.image = newImage
-                self.saveImage()
+                //self.saveImage()
             }
         }
         
