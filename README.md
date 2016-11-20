@@ -1,5 +1,4 @@
-# YLPaintShop
-<a href="https://github.com/yuhuili">![Yuhui Li](https://githubtools.yuhuili.com/kagami/yuhuili/Yuhui%20Li/)</a>
+<img src="GitHub/poster.png">
 
 YLPaintShop is a Swift library for simple image effects. It is written in Swift 3 and uses Core Graphics.
 
