@@ -35,8 +35,7 @@ class ViewController: UIViewController {
             shouldDraw = false
             lastRadius = Int(slider.value)
             
-            let dispatchTime: DispatchTime = DispatchTime.now() + Double(Int64(delay * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC)
-            DispatchQueue.main.asyncAfter(deadline: dispatchTime, execute: {
+            DispatchQueue.main.asyncAfter(deadline: .now() + delay, execute: {
                 self.shouldDraw = true;
             })
             
