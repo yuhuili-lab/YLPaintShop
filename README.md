@@ -20,3 +20,43 @@ img.paintEdge(threshold)
 ```
 img.gaussianBlur(radius)
 ```
+
+## Examples
+<img src="GitHub/14351.png" width="400">
+
+```
+img.scatter(10)
+```
+
+------
+
+<img src="GitHub/15236.png" width="400">
+
+```
+img.paintEdge(140)
+```
+
+------
+
+<img src="GitHub/18718.png" width="400">
+
+```
+img.gaussianBlur(10)
+```
+
+------
+
+<img src="GitHub/13150.png" width="400">
+
+```
+img.scatter(8).gaussianBlur(5)
+```
+
+------
+
+<img src="GitHub/16109.png" width="400">
+
+
+```
+img.paintEdge(140).gaussianBlur(3)
+```
