@@ -85,6 +85,26 @@ private extension UIImage {
         
         return kernel
     }
+    
+    static func gaussianKernelMultiplier(index index: Int, total: Int, kernel: [Int: Double]) -> Double {
+        let radius = kernel.count / 2
+        
+        var uselessAmount = 0.0
+        
+        if (index-radius < 0) {
+            for i in index-radius ... -1 {
+                uselessAmount += kernel[i-(index-radius)]!
+            }
+        }
+        
+        if (total <= index+radius) {
+            for i in total...index+radius {
+                uselessAmount += kernel[(kernel.count-1)-((index+radius)-i)]!
+            }
+        }
+        
+        return 1.0 / (1.0 - uselessAmount)
+    }
 }
 
 extension UIImage {
@@ -253,9 +273,11 @@ extension UIImage {
             var totalGreen:Double = 0
             var totalBlue:Double = 0
             
+            let gaussianKernelMultiplier = UIImage.gaussianKernelMultiplier(index: col, total: width, kernel: gaussianKernel)
+            
             for j in col-radius...col+radius where j>=0 && j<width {
                 
-                let multiplier = gaussianKernel[j-(col-radius)]! as Double
+                let multiplier = (gaussianKernel[j-(col-radius)]! as Double) * gaussianKernelMultiplier
                 
                 let newOffset = 4 * ((width * row) + j)
                 
