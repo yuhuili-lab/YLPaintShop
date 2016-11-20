@@ -34,43 +34,43 @@ private extension UIImage {
         return (newRow, newCol)
     }
     
-    private func createContext(inImage: CGImageRef) -> CGContext {
+    func createContext(_ inImage: CGImage) -> CGContext {
         let bitmapBytes = 4
         let colorSpace = CGColorSpaceCreateDeviceRGB()
         let bitsPerComponent = 8
         
-        let width = CGImageGetWidth(inImage)
-        let height = CGImageGetHeight(inImage)
+        let width = inImage.width
+        let height = inImage.height
         let bitmapBytesPerRow = width * bitmapBytes
         let bitmapByteCount = bitmapBytesPerRow * height
         
         // A pointer to the destination in memory where the drawing is to be rendered. The size of this memory block should be at least (bytesPerRow*height) bytes.
         let bitmapData = malloc(bitmapByteCount)
         
-        let context = CGBitmapContextCreate(bitmapData, width, height, bitsPerComponent, bitmapBytesPerRow, colorSpace, CGImageAlphaInfo.PremultipliedFirst.rawValue)
+        let context = CGContext(data: bitmapData, width: width, height: height, bitsPerComponent: bitsPerComponent, bytesPerRow: bitmapBytesPerRow, space: colorSpace, bitmapInfo: CGImageAlphaInfo.premultipliedFirst.rawValue)
         
         return context!
     }
 }
 
 extension UIImage {
-    func scatter(radius: Int) -> UIImage? {
+    func scatter(_ radius: Int) -> UIImage? {
         
-        let inImage:CGImageRef = self.CGImage!
+        let inImage:CGImage = self.cgImage!
         let context = self.createContext(inImage)
         
-        let width = CGImageGetWidth(inImage)
-        let height = CGImageGetHeight(inImage)
+        let width = inImage.width
+        let height = inImage.height
         let total = width*height
         
         let rect = CGRect(x:0, y:0, width:width, height:height)
         
-        CGContextClearRect(context, rect)
+        context.clear(rect)
         
-        CGContextDrawImage(context, rect, inImage)
+        context.draw(inImage, in: rect)
         
-        let data = CGBitmapContextGetData(context)
-        let dataType = UnsafeMutablePointer<UInt8>(data)
+        let data = context.data
+        let dataType = UnsafeMutableRawPointer(data)!.assumingMemoryBound(to: UInt8.self)
         
         
         for i in 0...total-1 {
@@ -84,19 +84,22 @@ extension UIImage {
             let (srcRow, srcCol) = UIImage.generateRandomPoints(row: row, col: col, width: width, height: height, radius: radius)
             let srcOffset = 4 * ((width * srcRow) + srcCol)
             
+            
             dataType[offset] = dataType[srcOffset]
             dataType[offset+1] = dataType[srcOffset+1]
             dataType[offset+2] = dataType[srcOffset+2]
             dataType[offset+3] = dataType[srcOffset+3]
+            
+            
             
         }
         
         let colorSpace = CGColorSpaceCreateDeviceRGB()
         let bitmapBytesPerRow = width * 4
         
-        let finalContext = CGBitmapContextCreate(data, width, height, 8, bitmapBytesPerRow, colorSpace, CGImageAlphaInfo.PremultipliedFirst.rawValue)
-        let imageRef = CGBitmapContextCreateImage(finalContext)
+        let finalContext = CGContext(data: data, width: width, height: height, bitsPerComponent: 8, bytesPerRow: bitmapBytesPerRow, space: colorSpace, bitmapInfo: CGImageAlphaInfo.premultipliedFirst.rawValue)
+        let imageRef = finalContext?.makeImage()
         
-        return UIImage(CGImage: imageRef!)
+        return UIImage(cgImage: imageRef!)
     }
 }

@@ -7,16 +7,17 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		186582AA1DE16EC5000BDDD7 /* pusheen.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 186582A91DE16EC5000BDDD7 /* pusheen.jpg */; };
 		9F8871C21DE15B4000F06AA0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F8871C11DE15B4000F06AA0 /* AppDelegate.swift */; };
 		9F8871C41DE15B4000F06AA0 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F8871C31DE15B4000F06AA0 /* ViewController.swift */; };
 		9F8871C71DE15B4000F06AA0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9F8871C51DE15B4000F06AA0 /* Main.storyboard */; };
 		9F8871C91DE15B4000F06AA0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9F8871C81DE15B4000F06AA0 /* Assets.xcassets */; };
 		9F8871CC1DE15B4000F06AA0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9F8871CA1DE15B4000F06AA0 /* LaunchScreen.storyboard */; };
 		9F8871D41DE15B7400F06AA0 /* YLPaintShop.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F8871D31DE15B7400F06AA0 /* YLPaintShop.swift */; };
-		9F8871D81DE1666F00F06AA0 /* pusheen.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 9F8871D71DE1666F00F06AA0 /* pusheen.jpg */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		186582A91DE16EC5000BDDD7 /* pusheen.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = pusheen.jpg; sourceTree = "<group>"; };
 		9F8871BE1DE15B4000F06AA0 /* YLPaintShopDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YLPaintShopDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9F8871C11DE15B4000F06AA0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9F8871C31DE15B4000F06AA0 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -25,7 +26,6 @@
 		9F8871CB1DE15B4000F06AA0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		9F8871CD1DE15B4000F06AA0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9F8871D31DE15B7400F06AA0 /* YLPaintShop.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YLPaintShop.swift; sourceTree = "<group>"; };
-		9F8871D71DE1666F00F06AA0 /* pusheen.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = pusheen.jpg; path = "../../../Stanford-CS106B-2016-Spring/Assignments/Assignment1/Fauxtoshop/res/pusheen.jpg"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,7 +58,7 @@
 		9F8871C01DE15B4000F06AA0 /* YLPaintShopDemo */ = {
 			isa = PBXGroup;
 			children = (
-				9F8871D71DE1666F00F06AA0 /* pusheen.jpg */,
+				186582A91DE16EC5000BDDD7 /* pusheen.jpg */,
 				9F8871C11DE15B4000F06AA0 /* AppDelegate.swift */,
 				9F8871C31DE15B4000F06AA0 /* ViewController.swift */,
 				9F8871C51DE15B4000F06AA0 /* Main.storyboard */,
@@ -102,6 +102,7 @@
 				TargetAttributes = {
 					9F8871BD1DE15B4000F06AA0 = {
 						CreatedOnToolsVersion = 7.3.1;
+						LastSwiftMigration = 0810;
 					};
 				};
 			};
@@ -130,8 +131,8 @@
 			files = (
 				9F8871CC1DE15B4000F06AA0 /* LaunchScreen.storyboard in Resources */,
 				9F8871C91DE15B4000F06AA0 /* Assets.xcassets in Resources */,
+				186582AA1DE16EC5000BDDD7 /* pusheen.jpg in Resources */,
 				9F8871C71DE15B4000F06AA0 /* Main.storyboard in Resources */,
-				9F8871D81DE1666F00F06AA0 /* pusheen.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -261,6 +262,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.yuhuili.YLPaintShopDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -272,6 +274,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.yuhuili.YLPaintShopDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};
@@ -294,6 +297,7 @@
 				9F8871D21DE15B4000F06AA0 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
