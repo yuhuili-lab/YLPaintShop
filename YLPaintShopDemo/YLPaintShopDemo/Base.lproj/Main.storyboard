@@ -29,7 +29,7 @@
         <!--Scatter-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="YLPaintShopDemo" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="ScatterViewController" customModule="YLPaintShopDemo" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -41,7 +41,7 @@
                             <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="20" minValue="0.0" maxValue="80" translatesAutoresizingMaskIntoConstraints="NO" id="4cg-Zj-HOF">
                                 <rect key="frame" x="18" y="572" width="339" height="31"/>
                                 <connections>
-                                    <action selector="sliderValueChanged:" destination="BYZ-38-t0r" eventType="valueChanged" id="0Mm-Ks-RlS"/>
+                                    <action selector="sliderValueChanged:" destination="BYZ-38-t0r" eventType="valueChanged" id="kZv-ih-TcP"/>
                                 </connections>
                             </slider>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="0Tq-7h-tha">
@@ -61,8 +61,8 @@
                     </view>
                     <tabBarItem key="tabBarItem" title="Scatter" id="fe4-7N-8rr"/>
                     <connections>
-                        <outlet property="mainImageView" destination="0Tq-7h-tha" id="qyY-6f-QMb"/>
-                        <outlet property="slider" destination="4cg-Zj-HOF" id="fZ2-nz-Ud9"/>
+                        <outlet property="mainImageView" destination="0Tq-7h-tha" id="DRH-nF-KFX"/>
+                        <outlet property="slider" destination="4cg-Zj-HOF" id="Wh3-3f-rSE"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

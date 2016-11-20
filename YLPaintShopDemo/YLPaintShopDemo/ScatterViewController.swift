@@ -1,14 +1,14 @@
 //
-//  ViewController.swift
+//  ScatterViewController.swift
 //  YLPaintShopDemo
 //
-//  Created by Alexander Li on 2016-11-19.
+//  Created by Yuhui Li on 2016-11-20.
 //  Copyright © 2016 Yuhui Li. All rights reserved.
 //
 
 import UIKit
 
-class ViewController: UIViewController {
+class ScatterViewController: UIViewController {
 
     @IBOutlet weak var mainImageView: UIImageView!
     @IBOutlet weak var slider: UISlider!
@@ -21,11 +21,10 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
-        
+
+        // Do any additional setup after loading the view.
         slider.value = Float(lastRadius)
         mainImageView.image = sampleImage.scatter(lastRadius)
-        
     }
     
     @IBAction func sliderValueChanged(_ sender: AnyObject) {
@@ -47,7 +46,16 @@ class ViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
 
+    /*
+    // MARK: - Navigation
+
+    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        // Get the new view controller using segue.destinationViewController.
+        // Pass the selected object to the new view controller.
+    }
+    */
 
 }
-
