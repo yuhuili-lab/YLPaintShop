@@ -156,9 +156,18 @@ class YLPaintShopViewController: UIViewController {
                 self.activityIndicator.stopAnimating()
                 self.activityIndicator.isHidden = true
                 self.imageView.image = newImage
+                self.saveImage()
             }
         }
         
         
+    }
+    
+    func saveImage() {
+        let fileManager = FileManager.default
+        let path = String((NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as NSString)) + String(format:"/%i.png", Int(arc4random()%10000+10000))
+        print(path)
+        let imageData = UIImagePNGRepresentation(imageView.image!)
+        fileManager.createFile(atPath: path as String, contents: imageData, attributes: nil)
     }
 }
