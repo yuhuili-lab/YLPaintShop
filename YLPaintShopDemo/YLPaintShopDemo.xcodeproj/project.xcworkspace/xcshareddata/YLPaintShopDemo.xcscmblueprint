@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "93AD0EE58DC3B8A58B3769590CD9D10FBF17692D",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "93AD0EE58DC3B8A58B3769590CD9D10FBF17692D" : 0,
+    "F62C351F5963CFC5ADDF0F5D64A7268606098FD7" : 0
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "034A49B3-5988-43D0-9B0F-8B81F8BEA166",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "93AD0EE58DC3B8A58B3769590CD9D10FBF17692D" : "YLPaintShop\/",
+    "F62C351F5963CFC5ADDF0F5D64A7268606098FD7" : "Stanford-CS106B-2016-Spring\/"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "YLPaintShopDemo",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "YLPaintShopDemo\/YLPaintShopDemo.xcodeproj",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/yuhuili\/YLPaintShop.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "93AD0EE58DC3B8A58B3769590CD9D10FBF17692D"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/yuhuili\/Stanford-CS106B-2016-Spring.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "F62C351F5963CFC5ADDF0F5D64A7268606098FD7"
+    }
+  ]
+}
